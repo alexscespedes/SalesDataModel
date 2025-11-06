@@ -29,7 +29,7 @@ public class SalesDbContext : DbContext
 
         modelBuilder.Entity<ProductCategory>()
             .HasOne(pc => pc.Category)
-            .WithMany(c => ProductCategories)
+            .WithMany(c => c.ProductCategories)
             .HasForeignKey(pc => pc.CategoryId);
 
         // One-to-many: Customer -> Orders
