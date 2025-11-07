@@ -8,6 +8,11 @@ builder.Services.AddDbContext<SalesDbContext>(options =>
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<SalesDbContext>();
+    DbInitializer.Initialize(context);
+}
 
 app.Run();
